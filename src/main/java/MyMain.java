@@ -16,10 +16,20 @@ public class MyMain {
     public static boolean binarySearch(int[] arr, int num) {
         return binarySearchTR(arr, num, 0, arr.length-1);
     }
-
     // Tail recursive method:
     public static boolean binarySearchTR(int[] arr, int num, int lowerBound, int upperBound) {
-        // YOUR CODE HERE
+        if (upperBound < lowerBound){
+            return false;
+        }
+        else if (arr[lowerBound + (upperBound-lowerBound)/2] < num){
+            return binarySearchTR(arr, num, (lowerBound + (upperBound-lowerBound)/2)+1, upperBound);
+        }
+        else if (arr[lowerBound + (upperBound-lowerBound)/2] > num){
+            return binarySearchTR(arr, num, lowerBound, (lowerBound + (upperBound-lowerBound)/2)-1);
+        }
+        else if (arr[lowerBound + (upperBound-lowerBound)/2] == num){
+            return true;
+        }
         return false;
     }
 
@@ -66,9 +76,36 @@ public class MyMain {
 
     // We continue on until one of the arrays is empty
     // Then we need to copy the rest of the array
-
     public static int[] merge(int[] arr1, int[] arr2) {
-        // YOUR CODE HERE
-        return null;
+        int j = 0;
+        int i = 0;
+        int k = 0;
+         int [] arr3 = new int[arr1.length*2];
+         while (arr3[arr3.length-1] == 0) {
+             if (j >= arr1.length){
+                 for (i = i; i < arr2.length; i ++){
+                     arr3[k] = arr2[i];
+                     k++;
+                 }
+             }
+             else if (i >= arr2.length){
+                 for (j = j; j < arr1.length; j ++){
+                     arr3[k] = arr1[j];
+                     k++;
+                 }
+             }
+             else if (arr1[j] < arr2[i]) {
+                 arr3[k] = arr1[j];
+                 j++;
+                 k++;
+             }
+             else if (arr1[j] > arr2[i]) {
+                 arr3[k] = arr2[i];
+                 i++;
+                 k++;
+             }
+
+         }
+        return arr3;
     }
 }
